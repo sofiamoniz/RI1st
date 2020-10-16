@@ -1,6 +1,6 @@
 import csv
 from string import digits
-
+from Indexer import Indexer
 
 class CorpusReader:
     def __init__(self, fileName):
@@ -11,23 +11,18 @@ class CorpusReader:
         corpus=[]
         titleAbstract = ""
      
-        with open('tokens.txt', 'w') as the_file:
-            with open (self.fileName, mode='r') as csv_to_read:
-                csv_reader=csv.DictReader(csv_to_read)
-                for row in csv_reader:
-                    
-                    if row['pubmed_id'] != "" and row['abstract'] != "":
-                        pub_id= row['pubmed_id']
-                        if pub_id not in alreadyRead: #verificar se o documento já foi ou não lido
-                            docContent = []
-                            alreadyRead.append(pub_id) #adicionar à lista dos já lidos
-                            #docContent[row['title']] = row['abstract'] #<title, abstract>  
-                            titleAbstract = row['title'] + row['abstract']
-                            docContent.append(titleAbstract)
-                            docContent=self.simple_tokenizer(titleAbstract)
-                            corpus.append(docContent)
-
-        print(corpus)                               
+        with open (self.fileName, mode='r') as csv_to_read:
+            csv_reader=csv.DictReader(csv_to_read)
+            for row in csv_reader:
+                if row['pubmed_id'] != "" and row['abstract'] != "":
+                    pub_id= row['pubmed_id']
+                    if pub_id not in alreadyRead: #verificar se o documento já foi ou não lido
+                        docContent = []
+                        alreadyRead.append(pub_id) #adicionar à lista dos já lidos
+                        titleAbstract = row['title'] + row['abstract']
+                        docContent.append(titleAbstract)
+                        docContent=self.simple_tokenizer(titleAbstract)
+                        corpus.append(docContent)                               
         
         return corpus
 
@@ -53,8 +48,12 @@ class CorpusReader:
         return new_string
 
 
-corpusReader = CorpusReader("exemplo.csv");
-corpusReader.read_content()
+corpusReader = CorpusReader("exemplo.csv")
+corpus=corpusReader.read_content()
+indexer = Indexer()
+for i in range(len(corpus)):
+    indexer.indexDocument(corpus[i],i+1)
+indexer.showInvertedIndex()
 
 
 
