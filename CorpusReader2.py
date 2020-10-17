@@ -1,6 +1,9 @@
 import csv
 from string import digits
 from Indexer import Indexer
+from Indexer2 import Indexer2
+from Table import Table
+import time
 
 class CorpusReader:
     def __init__(self, fileName):
@@ -48,13 +51,19 @@ class CorpusReader:
         return new_string
 
 
+start_time = time.time()
 corpusReader = CorpusReader("exemplo.csv")
 corpus=corpusReader.read_content()
 indexer = Indexer()
+indexer = Indexer2()
 for i in range(len(corpus)):
     indexer.indexDocument(corpus[i],i+1)
-indexer.showInvertedIndex()
-
+indexer.sortInvertedIndex()
+invertedIndex=indexer.getInvertedIndex()
+#indexer.showInvertedIndex()
+table = Table(invertedIndex)
+print("\n--- Tempo de execução:  %s segundos." % (time.time() - start_time))
+table.createTable()
 
 
 
