@@ -4,6 +4,7 @@ nltk.download('punkt')
 from string import digits
 from nltk.stem import PorterStemmer
 from nltk.tokenize import sent_tokenize, word_tokenize
+import re
 
 class CorpusReader:
     def __init__(self, fileName):
@@ -18,8 +19,7 @@ class CorpusReader:
         with open('tokens.txt', 'w') as the_file:
             with open (self.fileName, mode='r') as csv_to_read:
                 csv_reader=csv.DictReader(csv_to_read)
-                for row in csv_reader:
-                    
+                for row in csv_reader:                    
                     if row['pubmed_id'] != "" and row['abstract'] != "":
                         pub_id= row['pubmed_id']
                         if pub_id not in alreadyRead: #verificar se o documento já foi ou não lido
@@ -29,6 +29,7 @@ class CorpusReader:
                             #docContent[row['title']] = row['abstract'] #<title, abstract>  
                             titleAbstract = row['title'] + row['abstract']
                             lista_tokens=self.simple_tokenizer(titleAbstract)
+                            self.improved_tokenizer(titleAbstract)
                             docContent[contador]=lista_tokens
                             the_file.write(str(docContent)+"\n") 
         return titleAbstract
@@ -51,12 +52,6 @@ class CorpusReader:
         new_string = old_string.translate(str.maketrans('0123456789', '          '))
         return new_string
 
-    '''
-    An improved tokenizer that incorporates your own tokenization decisions (e.g. how to
-    deal with digits and characters such as ’, -, @, etc).
-    Integrate the Porter stemmer (http://snowball.tartarus.org/download.html) and a stopword
-    filter. Use this list as default: https://bit.ly/2kKBCqt
-    '''
 
     def list_stop_words(self):
         stop_words_list=[]
@@ -68,23 +63,23 @@ class CorpusReader:
 
 
     #pip install nltk
-    def improved_tokenizer(self):
-        example="Ola above"
+    def improved_tokenizer(self, old_string):
+        example= "h^&ell`.,|o w]{+orld"
         stop_words=self.list_stop_words()
-        word_tokens=word_tokenize(example)
-        filtered_sentence = [w for w in word_tokens if not w in stop_words] 
+        word_tokens=word_tokenize(old_string)
         filtered_sentence = [] 
-
-        for w in word_tokens: 
-            if w not in stop_words: 
-                filtered_sentence.append(w) 
-        
         Stem_words = []
         ps =PorterStemmer()
+
+        for w in word_tokens: 
+            if w not in stop_words and len(w) >=3:
+                filtered_sentence.append(re.sub('[^0-9a-zA-Z]+', '*', w)) #substitui por * para o caso de ç e ~
+                #filtered_sentence.append(w)        
+       
         for w in filtered_sentence:
             rootWord=ps.stem(w)
             Stem_words.append(rootWord)
-        print(filtered_sentence)
+        #print(filtered_sentence)
         print(Stem_words) 
 
       
@@ -94,7 +89,7 @@ class CorpusReader:
 
 corpusReader = CorpusReader("exemplo.csv");
 corpusReader.read_content()
-corpusReader.improved_tokenizer()
+#corpusReader.improved_tokenizer()
 #print(corpusReader.list_stop_words())
 
 
