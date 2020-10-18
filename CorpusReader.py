@@ -5,6 +5,7 @@ from string import digits
 from nltk.stem import PorterStemmer
 from nltk.tokenize import sent_tokenize, word_tokenize
 import re
+import argparse
 
 class CorpusReader:
     def __init__(self, fileName):
@@ -12,10 +13,16 @@ class CorpusReader:
 
 
     def read_content(self):
-        alreadyRead = [] #lista para guardar os ids dos documentos já lidos
-  
+        alreadyRead = [] #lista para guardar os ids dos documentos já lidos  
         titleAbstract = ""
         contador=0
+        parser = argparse.ArgumentParser()
+        parser.add_argument('-s', '--simple', action='store_true', 
+                            help="uses simple tokenizer")
+        parser.add_argument('-i', '--improved', action='store_true', 
+                            help="uses improved tokenizer")
+        args = parser.parse_args()
+
         with open('tokens.txt', 'w') as the_file:
             with open (self.fileName, mode='r') as csv_to_read:
                 csv_reader=csv.DictReader(csv_to_read)
@@ -28,8 +35,11 @@ class CorpusReader:
                             alreadyRead.append(pub_id) #adicionar à lista dos já lidos
                             #docContent[row['title']] = row['abstract'] #<title, abstract>  
                             titleAbstract = row['title'] + row['abstract']
-                            lista_tokens=self.simple_tokenizer(titleAbstract)
-                            self.improved_tokenizer(titleAbstract)
+                            
+                            if args.simple:
+                                lista_tokens=self.simple_tokenizer(titleAbstract)
+                            elif args.improved:
+                                lista_tokens=self.improved_tokenizer(titleAbstract)
                             docContent[contador]=lista_tokens
                             the_file.write(str(docContent)+"\n") 
         return titleAbstract
