@@ -16,8 +16,8 @@ class ImprovedTokenizer:
         return stop_words_list
 
     #pip install nltk
-    def improved_tokenizer(self, old_string):
-        example= "h^&ell`.,|o w]{+orld"
+    def improved_tokenizer(self):
+        #example= "h^&ell`.,|o w]{+orld"
         stop_words=self.list_stop_words()
         word_tokens=word_tokenize(self.received_string)
         filtered_sentence = [] 

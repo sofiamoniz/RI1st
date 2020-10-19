@@ -12,7 +12,6 @@ class CorpusReader:
         alreadyRead = [] #lista para guardar os ids dos documentos já lidos
         corpus=[]
         titleAbstract = ""
-     
         with open (self.fileName, mode='r') as csv_to_read:
             csv_reader=csv.DictReader(csv_to_read)
             for row in csv_reader:
@@ -23,11 +22,11 @@ class CorpusReader:
                         alreadyRead.append(pub_id) #adicionar à lista dos já lidos
                         titleAbstract = row['title'] + row['abstract']
                         docContent.append(titleAbstract)
-                        print("ola", self.chosen_arg)
-                        if self.chosen_arg == "s":
-                            docContent=simple_tokenizer(titleAbstract)
-                        elif self.chosen_arg == "i":
-                            docContent=improved_tokenizer(titleAbstract)
+                        if self.chosen_arg == 's':
+                            simp = SimpleTokenizer(titleAbstract)
+                            docContent=simp.simple_tokenizer()
+                        elif self.chosen_arg == 'i':
+                            improv = ImprovedTokenizer(titleAbstract)
+                            docContent=improv.improved_tokenizer()
                         corpus.append(docContent)                               
-        
         return corpus
