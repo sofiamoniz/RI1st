@@ -7,7 +7,7 @@
 
     1.What was the total indexing time and how much memory (roughly) is required to index
     this collection?
-        A
+        A:
     2.What is your vocabulary size?
         A:
     3.List the ten first terms (in alphabetic order) that appear in only one document (document
