@@ -17,7 +17,6 @@ class ImprovedTokenizer:
 
     #pip install nltk
     def improved_tokenizer(self):
-        #example= "h^&ell`.,|o w]{+orld"
         stop_words=self.list_stop_words()
         word_tokens=word_tokenize(self.received_string)
         filtered_sentence = [] 
@@ -26,12 +25,9 @@ class ImprovedTokenizer:
 
         for w in word_tokens: 
             if w not in stop_words and len(w) >=3:
-                filtered_sentence.append(re.sub('[^0-9a-zA-Z]+', '*', w)) #substitui por * para o caso de ç e ~
-                #filtered_sentence.append(w)        
+                filtered_sentence.append(re.sub('[^0-9a-zA-Z]+', '', w))
        
         for w in filtered_sentence:
             rootWord=ps.stem(w)
             Stem_words.append(rootWord)
-        #print(filtered_sentence)
-        #print(Stem_words) 
         return Stem_words
