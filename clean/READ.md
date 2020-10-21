@@ -1,7 +1,11 @@
 ### Para correr o programa:
 
     1. Executar o comando pip install nltk
-    2. Executar o comando ___DocumentIndexer.py -s <fileToRead>___ (onde -s indica que será usado o SimpleTokenizer) ou ___DocumentIndexer.py -i <fileToRead>___ (onde -i indica que será usado o ImprovedTokenizer)
+    2. Executar um dos comandos: 
+        1.DocumentIndexer.py -s <fileToRead>
+            (onde -s indica que será usado o SimpleTokenizer) 
+        2.DocumentIndexer.py -i <fileToRead> 
+            (onde -i indica que será usado o ImprovedTokenizer)
 
 ### Respostas exercício 4:
 
