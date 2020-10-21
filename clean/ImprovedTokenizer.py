@@ -5,24 +5,37 @@ from nltk.tokenize import sent_tokenize, word_tokenize
 import re
 
 class ImprovedTokenizer:
+
     def __init__(self, received_string):
         self.received_string=received_string
 
+
     def list_stop_words(self):
+
         stop_words_list=[]
+
         with open ("snowball_stopwords_EN.txt", mode='r') as stop_words:
             for word in stop_words:
                 stop_words_list.append(word.strip())
+
         return stop_words_list
 
+
+
     def all_characs_same(self,s) :
+
         n = len(s)
+
         for i in range(1, n) :
             if s[i] != s[0] :
                 return False    
+
         return True
 
+
+
     def improved_tokenizer(self):
+
         stop_words=self.list_stop_words()
         word_tokens=word_tokenize(self.received_string)
         filtered_sentence = [] 
