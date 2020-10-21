@@ -2,9 +2,9 @@
 
     1. Executar o comando pip install nltk
     2. Executar um dos comandos: 
-        1.DocumentIndexer.py -s <fileToRead>
+        1.python3 DocumentIndexer.py -s <fileToRead>
             (onde -s indica que será usado o SimpleTokenizer) 
-        2.DocumentIndexer.py -i <fileToRead> 
+        2.python3 DocumentIndexer.py -i <fileToRead> 
             (onde -i indica que será usado o ImprovedTokenizer)
 
 ### Respostas exercício 4:
