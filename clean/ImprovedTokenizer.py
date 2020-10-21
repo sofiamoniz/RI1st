@@ -31,13 +31,12 @@ class ImprovedTokenizer:
 
         for w in word_tokens: 
             if w not in stop_words and len(w) >=3:
-                if 'www' in w or 'http' in w or 'https' in w:
+                if ('www' in w or 'http' in w or 'https' in w) and w.count('.') > 1:
                     if len(w) > 5:
-                        if w.count('.') > 1: #verificar que existem pelo menos dois pontos para fazer split
                             filtered_sentence.append(w.split('.')[1])
-                        else: #caso contrário, como em https://clinicaltrials. gov, fazer split por //
-                            if (w.split('//')[1].count('.') > 0):
-                                filtered_sentence.append(w.split('//')[1].split(".")[0])
+                        #else: #caso contrário, como em https://clinicaltrials. gov, fazer split por //
+                         #   if (w.split('//')[1].count('.') > 0):
+                          #      filtered_sentence.append(w.split('//')[1].split(".")[0])
 
                 else:   
                     word = re.sub('[^0-9a-zA-Z]+', '', w)

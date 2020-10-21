@@ -4,7 +4,7 @@ class Table:
        
 
     def createTable(self):
-        #print("\n")
+        print("\n")
         invertedList=[]
         for term,freqPosting in self.invertedIndex.items():
             entryList=[]
@@ -12,6 +12,6 @@ class Table:
             entryList.append(str(freqPosting[0]))
             entryList.append(str(freqPosting[1]))
             invertedList.append(entryList)
-        #print ("{:<20} {:<9} {:<10}".format('Term','DocFreq','Docs'))
-        #for item in invertedList:
-            #print ("{:<20} {:<9} {:<10}".format(item[0],str(item[1]),str(item[2])))
+        print ("{:<20} {:<9} {:<10}".format('Term','DocFreq','Docs'))
+        for item in invertedList:
+            print ("{:<20} {:<9} {:<10}".format(item[0],str(item[1]),str(item[2])))
