@@ -37,7 +37,7 @@ class ImprovedTokenizer:
                         #else: #caso contrário, como em https://clinicaltrials. gov, fazer split por //
                          #   if (w.split('//')[1].count('.') > 0):
                           #      filtered_sentence.append(w.split('//')[1].split(".")[0])
-
+                #isto assim está a descartar muitos sites
                 else:   
                     word = re.sub('[^0-9a-zA-Z]+', '', w)
                     if word.isdigit(): #se a string for apenas um numero, vai apenas guardar aqueles com  4 digitos - equivalente a anos
