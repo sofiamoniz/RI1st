@@ -63,7 +63,7 @@ class DocumentIndexer:
                     +"\n--- Total number of terms: %d terms." % (total_terms)
                     +"\n--- Indexation time:  %s seconds." % (indexing_time)
                     +"\n--- Size in memory used by the dictionary structure:  %s %s." % (memory_dic[0], memory_dic[1])
-                    +"\n--- Memory required:  %s %s." % (memory_used[0], memory_used[1])
+                    +"\n--- Memory required by the program:  %s %s." % (memory_used[0], memory_used[1])
                     + "\n--- Directory with the Inverted Index: results/improvedTokenizer"
                     + "\n--- Directory that contains the real document Id's and auto generated ones: results\n")
         
