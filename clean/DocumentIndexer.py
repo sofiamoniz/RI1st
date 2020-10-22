@@ -42,7 +42,10 @@ class DocumentIndexer:
         results.write_index_to_file()
         results.print_table_for_inverted_index()
         process = psutil.Process(os.getpid())
-        memory_used= self.format_bytes(process.memory_info().rss)
+        
+        memory_used= self.format_bytes(process.memory_info().rss) #memória usada pelo programa
+        memory_dic = self.format_bytes(indexer.get_size_in_mem())
+
         
         # Print results:
         if(self.tokenizer_type=="s"):
@@ -50,7 +53,8 @@ class DocumentIndexer:
                     +"\n--- Number of documents:  %s documents." % (total_docs) 
                     +"\n--- Total number of terms: %d terms." % (total_terms)
                     +"\n--- Indexation time:  %s seconds." % (indexing_time)
-                    +"\n--- Memory required:  %s %s." % (memory_used[0], memory_used[1])
+                    +"\n--- Size in memory used by the dictionary structure:  %s %s." % (memory_dic[0], memory_dic[1])
+                    +"\n--- Memory required by the program:  %s %s." % (memory_used[0], memory_used[1])
                     + "\n--- Directory with the Inverted Index: results/simpleTokenizer"
                     + "\n--- Directory that contains the real document Id's and auto generated ones: results\n")
         else:
@@ -58,6 +62,7 @@ class DocumentIndexer:
                     +"\n--- Number of documents:  %s documents." % (total_docs) 
                     +"\n--- Total number of terms: %d terms." % (total_terms)
                     +"\n--- Indexation time:  %s seconds." % (indexing_time)
+                    +"\n--- Size in memory used by the dictionary structure:  %s %s." % (memory_dic[0], memory_dic[1])
                     +"\n--- Memory required:  %s %s." % (memory_used[0], memory_used[1])
                     + "\n--- Directory with the Inverted Index: results/improvedTokenizer"
                     + "\n--- Directory that contains the real document Id's and auto generated ones: results\n")

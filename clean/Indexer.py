@@ -1,10 +1,9 @@
+from sys import getsizeof
 class Indexer:
 
     def __init__(self):
         self.inverted_index={}
        
-
-
     def index_document(self,document_terms,document_id):
 
         for term in document_terms:
@@ -47,4 +46,6 @@ class Indexer:
 
         print(self.inverted_index) 
    
+    def get_size_in_mem(self):
+        return getsizeof(self.inverted_index)
 
