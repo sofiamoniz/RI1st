@@ -3,6 +3,9 @@ from Indexer import Indexer
 from Results import Results
 import time
 import sys, getopt
+import os
+import psutil
+
 
 def main(argv):
 
@@ -11,21 +14,20 @@ def main(argv):
 
     try:
         opts,args = getopt.getopt(argv,"hs:i:",["sfile=","ifile="])
-    except getopt.GetoptError:
-        print ('DocumentIndexer.py -s <fileToRead>')
-        print ('DocumentIndexer.py -i <fileToRead>')
+    except getopt.GetoptError: #if there's an argument error, the instructions are shown
+        print ('Usage:\nDocumentIndexer.py -s <fileToRead>\nor DocumentIndexer.py -i <fileToRead>')
         sys.exit(2)
+    if opts==[]: #if the user didn't pass any arguments
+        print ('Usage:\nDocumentIndexer.py -s <fileToRead>\nor DocumentIndexer.py -i <fileToRead>')
+        sys.exit()
     for opt, arg in opts:
-        if opt == '-h':
-            print ('DocumentIndexer.py -s <fileToRead>\nor DocumentIndexer.py -i <fileToRead>')
-            sys.exit()
-        elif opt == '':
-            print ('DocumentIndexer.py -s <fileToRead>\nDocumentIndexer.py -i <fileToRead>')
-            sys.exit()
-        elif opt in ("-s", "--sfile"):
+        if opt == '-h': #if the user looks for help, the instructions are shown
+            print ('Usage:\nDocumentIndexer.py -s <fileToRead>\nor DocumentIndexer.py -i <fileToRead>')
+            sys.exit()            
+        elif opt in ("-s", "--sfile"): #the user choses to use the simple tokenizer
             input_file = arg
             document_indexer(input_file,'s')
-        elif opt in ("-i", "--ifile"):
+        elif opt in ("-i", "--ifile"): #the user choses to use the improved tokenizer
             input_file = arg
             document_indexer(input_file,'i')
 
@@ -61,6 +63,8 @@ def document_indexer(input_file,tokenizer_type):
     results.write_document_ids_to_file()
     results.write_index_to_file()
     results.print_table_for_inverted_index()
+    process = psutil.Process(os.getpid())
+    memory_used= format_bytes(process.memory_info().rss)
     
     # Print results:
     if(tokenizer_type=="s"):
@@ -68,6 +72,7 @@ def document_indexer(input_file,tokenizer_type):
                 +"\n--- Number of documents:  %s documents." % (total_docs) 
                 +"\n--- Total number of terms: %d terms." % (total_terms)
                 +"\n--- Indexation time:  %s seconds." % (indexing_time)
+                +"\n--- Memory required:  %s %s." % (memory_used[0], memory_used[1])
                 + "\n--- Directory with the Inverted Index: results/simpleTokenizer"
                 + "\n--- Directory that contains the real document Id's and auto generated ones: results\n")
     else:
@@ -75,11 +80,20 @@ def document_indexer(input_file,tokenizer_type):
                 +"\n--- Number of documents:  %s documents." % (total_docs) 
                 +"\n--- Total number of terms: %d terms." % (total_terms)
                 +"\n--- Indexation time:  %s seconds." % (indexing_time)
+                +"\n--- Memory required:  %s %s." % (memory_used[0], memory_used[1])
                 + "\n--- Directory with the Inverted Index: results/improvedTokenizer"
                 + "\n--- Directory that contains the real document Id's and auto generated ones: results\n")
     
 
-
+def format_bytes(size): #conversion from StackOverflow
+    # 2**10 = 1024
+    power = 2**10
+    n = 0
+    power_labels = {0 : '', 1: 'kilo', 2: 'mega', 3: 'giga', 4: 'tera'}
+    while size > power:
+        size /= power
+        n += 1
+    return size, power_labels[n]+'bytes'
 
 if __name__ == '__main__':
     main(sys.argv[1:])

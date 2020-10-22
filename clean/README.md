@@ -1,13 +1,14 @@
-### Para correr o programa:
+### To run the script:
 
-    1. Executar o comando pip install nltk
-    2. Executar um dos comandos: 
+    1. Run the command pip install nltk
+    2. Run the command pip install psutil
+    3. Execute one of the commands bellow: 
         1.python3 DocumentIndexer.py -s <fileToRead>
-            (onde -s indica que será usado o SimpleTokenizer) 
+            (where -s means that SimpleTokenizer will be used) 
         2.python3 DocumentIndexer.py -i <fileToRead> 
-            (onde -i indica que será usado o ImprovedTokenizer)
+            (where -i means that ImprovedTokenizer will be used)
 
-### Respostas exercício 4:
+### Answers to the last exercise:
 
     1.What was the total indexing time and how much memory (roughly) is required to index
     this collection?

@@ -10,7 +10,7 @@ class ImprovedTokenizer:
         self.received_string=received_string
 
 
-    def list_stop_words(self):
+    def list_stop_words(self): #reads and saves the stop words from the file required
 
         stop_words_list=[]
 
@@ -22,7 +22,7 @@ class ImprovedTokenizer:
 
 
 
-    def all_characs_same(self,s) :
+    def all_characs_same(self,s) : #verifies if a string as all the same chars
 
         n = len(s)
 
@@ -36,8 +36,8 @@ class ImprovedTokenizer:
 
     def improved_tokenizer(self):
 
-        stop_words=self.list_stop_words()
-        word_tokens=word_tokenize(self.received_string)
+        stop_words=self.list_stop_words() #save the stop words to be used in a list
+        word_tokens=word_tokenize(self.received_string) #transform the received string in tokens, by using the function word_tokenize from library ntlk
         filtered_sentence = [] 
         Stem_words = []
         ps =PorterStemmer()
@@ -52,16 +52,16 @@ class ImprovedTokenizer:
                           #      filtered_sentence.append(w.split('//')[1].split(".")[0])
                 #isto assim está a descartar muitos sites
                 else:   
-                    word = re.sub('[^0-9a-zA-Z]+', '', w)
-                    if word.isdigit(): #se a string for apenas um numero, vai apenas guardar aqueles com  4 digitos - equivalente a anos
+                    word = re.sub('[^0-9a-zA-Z]+', '', w) #replaces special characters by nothing -> example anti-virus to antivirus
+                    if word.isdigit(): #if the string is a number, it will only save the ones with > 4 digits (meaning years)
                         if len(word) == 4:
                             filtered_sentence.append(word)
                     else:
                         filtered_sentence.append(word)
        
         for w in filtered_sentence:            
-            rootWord=ps.stem(w)
-            if len(rootWord) >= 3 and not self.all_characs_same(rootWord): #palavras com pelo menos 3 cars, depois do stem, e sem letras todas iguais (como zzz)
+            rootWord=ps.stem(w) #do the stem to the each word from filtered_sentence, using the PorterStemmer
+            if len(rootWord) >= 3 and not self.all_characs_same(rootWord): #words with at least 3 chars (after the stem), and not having all the same chars (eg. zzz)
                 Stem_words.append(rootWord)
 
         '''

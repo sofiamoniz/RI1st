@@ -20,19 +20,19 @@ class CorpusReader:
             for row in csv_reader: # Reads and Tokenizes one document at time
                 if row['pubmed_id'] != "" and row['abstract'] != "":
                     pub_id= row['pubmed_id']
-                    if pub_id not in already_read: #verificar se o documento já foi ou não lido
+                    if pub_id not in already_read: #verifies if the document was already read
                         doc_content = []
-                        already_read.append(pub_id) #adicionar à lista dos já lidos
-                        title_abstract = row['title'] + " " + row['abstract']
+                        already_read.append(pub_id) #add to the list that has the documents that were already read
+                        title_abstract = row['title'] + " " + row['abstract'] #save the title and the abstract of the document and save it to the doc_content list
                         doc_content.append(title_abstract)
-                        if self.chosen_arg == 's':
+                        if self.chosen_arg == 's': #the user chose to use the simpleTokenizer
                             simp = SimpleTokenizer(title_abstract)
                             doc_content=simp.simple_tokenizer()
-                        elif self.chosen_arg == 'i':
+                        elif self.chosen_arg == 'i': #the user chose to use the improvedTokenizer
                             improv = ImprovedTokenizer(title_abstract)
                             doc_content=improv.improved_tokenizer()
-                        corpus.append(doc_content) 
+                        corpus.append(doc_content) #save the content of the document after passing through the tokenizer
 
-        real_doc_ids=already_read     
+        real_doc_ids=already_read    
 
         return corpus,real_doc_ids
