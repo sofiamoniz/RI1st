@@ -3,9 +3,9 @@
     1. Run the command pip install nltk
     2. Run the command pip install psutil
     3. Execute one of the commands bellow: 
-        1.python3 DocumentIndexer.py -s <fileToRead>
+        1.python3 Main.py -s <fileToRead>
             (where -s means that SimpleTokenizer will be used) 
-        2.python3 DocumentIndexer.py -i <fileToRead> 
+        2.python3 Main.py -i <fileToRead> 
             (where -i means that ImprovedTokenizer will be used)
 
 ### Answers to the last exercise:
