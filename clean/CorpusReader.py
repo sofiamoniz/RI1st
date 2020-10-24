@@ -18,8 +18,8 @@ class CorpusReader:
         with open (self.file_name, mode='r') as csv_to_read:
             csv_reader=csv.DictReader(csv_to_read)
             for row in csv_reader: # Reads and Tokenizes one document at time
-                if row['pubmed_id'] != "" and row['abstract'] != "":
-                    pub_id= row['pubmed_id']
+                if row['doi'] != "" and row['abstract'] != "":
+                    pub_id= row['doi']
                     if pub_id not in already_read: #verifies if the document was already read
                         doc_content = []
                         already_read.append(pub_id) #add to the list that has the documents that were already read

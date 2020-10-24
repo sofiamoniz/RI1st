@@ -40,7 +40,7 @@ class DocumentIndexer:
         results = Results(inverted_index,doc_ids,self.tokenizer_type) ## Results ( writes informations to files )
         results.write_document_ids_to_file()
         results.write_index_to_file()
-        results.print_table_for_inverted_index()
+        #results.print_table_for_inverted_index()
         process = psutil.Process(os.getpid())
         
         memory_used= self.format_bytes(process.memory_info().rss) #memória usada pelo programa
