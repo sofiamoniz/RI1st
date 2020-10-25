@@ -11,7 +11,7 @@ class ImprovedTokenizer:
         self.received_string=received_string
 
 
-    def list_stop_words(self): #reads and saves the stop words from the file required
+    def list_stop_words(self): # Reads and saves the stop words from the file required
 
         stop_words_list=[]
 
@@ -23,7 +23,7 @@ class ImprovedTokenizer:
 
 
 
-    def all_characs_same(self,s) : #verifies if a string as all the same chars
+    def all_characs_same(self,s) : # Verifies if a string as all the same chars
 
         n = len(s)
 
@@ -37,36 +37,36 @@ class ImprovedTokenizer:
 
     def improved_tokenizer(self):
 
-        stop_words=self.list_stop_words() #save the stop words to be used in a list
-        word_tokens=word_tokenize(self.received_string) #transform the received string in tokens, by using the function word_tokenize from library ntlk
+        stop_words=self.list_stop_words() # Save the stop words to be used in a list
+        word_tokens=word_tokenize(self.received_string) # Transform the received string in tokens, by using the function word_tokenize from library ntlk
         filtered_sentence = [] 
         Stem_words = []
         ps =PorterStemmer()
 
         for w in word_tokens: 
             if w not in stop_words and len(w) >=3:
-                if ('www' in w or 'http' in w or 'https' in w) and w.count('.') > 1: #this condition is made to transfrom a website and give the user only the. 
-                                                                                    #relevant part. Eg: www.google.com -> google
+                if ('www' in w or 'http' in w or 'https' in w) and w.count('.') > 1: # This condition is made to transfrom a website and give the user only the. 
+                                                                                     # Relevant part. Eg: www.google.com -> google
                     parse_object = urlparse(w)
                     if (parse_object.netloc != ''):
                         filtered_sentence.append(parse_object.netloc.split('.')[1])
                     else:
-                        if w.startswith('www'): #this refers to the objects that can't be treated by the library urlparse
+                        if w.startswith('www'): # This refers to the objects that can't be treated by the library urlparse
                             filtered_sentence.append(w.split('.')[1])
                 else:   
-                    word = re.sub('[^0-9a-zA-Z]+', '', w) #replaces special characters by nothing -> example anti-virus to antivirus
-                    if word.isdigit(): #if the string is a number, it will only save the ones with > 4 digits (meaning years)
+                    word = re.sub('[^0-9a-zA-Z]+', '', w) # Replaces special characters by nothing -> example anti-virus to antivirus
+                    if word.isdigit(): # If the string is a number, it will only save the ones with > 4 digits (meaning years)
                         if len(word) == 4:
                             filtered_sentence.append(word)
-                    elif any(char.isdigit() for char in word): #this condition is made to avoid words like xy3 that are not perceptible
+                    elif any(char.isdigit() for char in word): # This condition is made to avoid words like xy3 that are not perceptible
                         if len(word) > 3:
                             filtered_sentence.append(word)
                     else:
                         filtered_sentence.append(word)
        
         for w in filtered_sentence:            
-            rootWord=ps.stem(w) #do the stem to the each word from filtered_sentence, using the PorterStemmer
-            if len(rootWord) >= 3 and not self.all_characs_same(rootWord): #words with at least 3 chars (after the stem), and not having all the same chars (eg. zzz)
+            rootWord=ps.stem(w) # Do the stem to the each word from filtered_sentence, using the PorterStemmer
+            if len(rootWord) >= 3 and not self.all_characs_same(rootWord): # Words with at least 3 chars (after the stem), and not having all the same chars (eg. zzz)
                 Stem_words.append(rootWord)
 
         '''

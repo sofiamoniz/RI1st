@@ -2,10 +2,11 @@ import json
 
 class Results:
 
-    def __init__(self,inverted_index,docIds,tokenizer_type):
+    def __init__(self,inverted_index,docIds,tokenizer_type,input_file):
         self.inverted_index=inverted_index
         self.docsIds=docIds
         self.tokenizer_type=tokenizer_type
+        self.file_name=input_file
        
 
 
@@ -13,13 +14,13 @@ class Results:
     def write_index_to_file(self):
 
         if(self.tokenizer_type=="s"):
-            with open('results/simpleTokenizer/invertedIndex.txt','w') as file_index:
+            with open('results/simpleTokenizer/invertedIndex_'+self.file_name[:-4]+'.txt','w') as file_index:
                 json.dump(self.inverted_index,file_index)
         else:
-            with open('results/improvedTokenizer/invertedIndex.txt','w') as file_index:
+            with open('results/improvedTokenizer/invertedIndex_'+self.file_name[:-4]+'.txt','w') as file_index:
                 json.dump(self.inverted_index,file_index)
 
-        ## to quickly load the file from disk to a dictionary in memory do:
+        ## To quickly load the file from disk to a dictionary in memory do:
         #     
         # with open('results/invertedIndex.txt') as file_index:
         #   dic = json.load(file_index)            
@@ -31,7 +32,7 @@ class Results:
         with open('results/documentIds.txt','w') as file_ids:
             json.dump(self.docsIds, file_ids)
 
-        ## to quickly load the file from disk to a dictionary in memory do:
+        ## To quickly load the file from disk to a dictionary in memory do:
         #     
         # with open('results/documentIds.txt') as file_ids:
         #   dic = json.load(file_ids)
@@ -42,7 +43,7 @@ class Results:
 
 
 ## OPTIONAL:
-#  prints in terminal a table with the inverted index
+#  Prints in terminal a table with the inverted index
 
     def print_table_for_inverted_index(self):
 
