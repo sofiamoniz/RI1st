@@ -2,12 +2,11 @@ from sys import getsizeof
 class Indexer:
 
     def __init__(self):
-        self.inverted_index={}
+        self.inverted_index=dict()
        
     def index_document(self,document_terms,document_id):
 
         for term in document_terms:
-            new_document=True
             if term not in self.inverted_index:
                 freq_posting=[] # [doc_freq,posting]  where doc_freq is the number total of documents where the term occurs
                                 # In python, the order of an array is mantained, so no problem!
@@ -19,14 +18,12 @@ class Indexer:
             else:
                 freq_posting=self.inverted_index[term]
                 posting=freq_posting[1] # The second position of this arrays are always the posting dictionary!
-                for doc_id in posting.keys():
-                    if doc_id==document_id: # The document already exists in the posting dictionary, so we only need to increment the occurance of the term in it
-                        posting[doc_id]=posting[doc_id]+1
-                        new_document=False
-                        break
-                if(new_document==True): # The document for this term don't exists in the posting dictionary
-                    freq_posting[0]=freq_posting[0]+1
+                if document_id in posting:
+                    posting[document_id]=posting[document_id]+1 # The document already exists in the posting dictionary, so we only need to increment the occurance of the term in it
+                else: # The document for this term don't exists in the posting dictionary
                     posting[document_id]=1
+                    freq_posting[0]=freq_posting[0]+1
+                    
         
       
 
@@ -46,6 +43,8 @@ class Indexer:
 
         print(self.inverted_index) 
    
+
+
     def get_size_in_mem(self):
 
         return getsizeof(self.inverted_index)

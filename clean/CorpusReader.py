@@ -11,7 +11,7 @@ class CorpusReader:
 
     def read_content(self):
 
-        already_read = [] # Will store the abstracts of documents already read
+        already_read = [] # Will store the title of documents already read
         corpus=[] # Will store, at each position, an array, for each document, with the terms after tokenization
         title_abstract = ""
         real_doc_ids=[]
@@ -20,7 +20,7 @@ class CorpusReader:
             csv_reader=csv.DictReader(csv_to_read)
             for row in csv_reader: # Reads and Tokenizes one document at time
                 if row['abstract'] != "":
-                    title=row['title']
+                    title=row['title'] 
                     if title not in already_read: # Verifies if the document was already read
                         if row['doi'] == "": real_id=row['pmcid']
                         else: real_id=row['doi']   
