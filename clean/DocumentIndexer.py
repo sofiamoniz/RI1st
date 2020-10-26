@@ -53,18 +53,18 @@ class DocumentIndexer:
             print("\n    Tokenizer used: Simple \n"
                     +"\n--- Number of documents:  %s documents." % (total_docs) 
                     +"\n--- Total number of terms: %d terms." % (total_terms)
-                    +"\n--- Indexation time:  %s seconds." % (indexing_time)
-                    +"\n--- Size in memory used by the dictionary structure:  %s %s." % (memory_dic[0], memory_dic[1])
-                    +"\n--- Memory required by the program:  %s %s." % (memory_used[0], memory_used[1])
+                    +"\n--- Indexation time:  %s seconds." % (round(indexing_time,3))
+                    +"\n--- Size in memory used by the dictionary structure:  %s %s." % (round(memory_dic[0],3), memory_dic[1])
+                    +"\n--- Memory required by the program:  %s %s." % (round(memory_used[0],3), memory_used[1])
                     + "\n--- Directory with the Inverted Index: results/simpleTokenizer"
                     + "\n--- Directory that contains the real document Id's and auto generated ones: results\n")
         else:
             print("\n    Tokenizer used: Improved \n"
                     +"\n--- Number of documents:  %s documents." % (total_docs) 
                     +"\n--- Total number of terms: %d terms." % (total_terms)
-                    +"\n--- Indexation time:  %s seconds." % (indexing_time)
-                    +"\n--- Size in memory used by the dictionary structure:  %s %s." % (memory_dic[0], memory_dic[1])
-                    +"\n--- Memory required by the program:  %s %s." % (memory_used[0], memory_used[1])
+                    +"\n--- Indexation time:  %s seconds." % (round(indexing_time,3))
+                    +"\n--- Size in memory used by the dictionary structure:  %s %s." % (round(memory_dic[0],3), memory_dic[1])
+                    +"\n--- Memory required by the program:  %s %s." % (round(memory_used[0],3), memory_used[1])
                     + "\n--- Directory with the Inverted Index: results/improvedTokenizer"
                     + "\n--- Directory that contains the real document Id's and auto generated ones: results\n")
         

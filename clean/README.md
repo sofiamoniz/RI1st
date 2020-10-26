@@ -13,10 +13,23 @@
     1.What was the total indexing time and how much memory (roughly) is required to index
     this collection?
         A:
+            -With simple tokenizer:
+                -Indexing time: 287.253 seconds
+                -Memory used by python process: 443.379 megabytes
+                -Memory used by the dictionary structure: 2.5 megabytes
+            -With improved tokenizer:
+                -Indexing time: 98.239 seconds
+                -Memory used by python process: 355.699 megabytes
+                -Memory used by the dictionary structure: 2.5 megabytes
+
     2.What is your vocabulary size?
-        A:
+        A: 
+            -With simple tokenizer: 4159309
+            -With improved tokenizer: 3097377
+
     3.List the ten first terms (in alphabetic order) that appear in only one document (document
     frequency = 1).
         A:
+
     4.List the ten terms with highest document frequency.
         A:

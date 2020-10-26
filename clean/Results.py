@@ -48,10 +48,10 @@ class Results:
     def print_table_for_inverted_index(self):
 
         inverted_list=[]
+        entry_list=[]
 
         print("\nTable for Inverted Index: \n")
-        for term,freq_posting in self.inverted_index.items():
-            entry_list=[]
+        for term,freq_posting in self.inverted_index.items():            
             entry_list.append(term)
             entry_list.append(str(freq_posting[0]))
             entry_list.append(str(freq_posting[1]))
