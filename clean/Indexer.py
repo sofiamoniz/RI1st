@@ -1,3 +1,6 @@
+# Alina Yanchuk, nmec 89093
+# Ana Sofia Fernandes, nmec 88739
+
 from sys import getsizeof
 
 ## Class that creates the Inverted Index for the document Corpus
@@ -64,10 +67,14 @@ class Indexer:
 
 
     def get_size_in_mem(self):
+<<<<<<< HEAD
 
         """
         Returns the size of the dictionary with the Inverted Index
         """
 
         return getsizeof(self.inverted_index)
+=======
+        return getsizeof(self.get_inverted_index())
+>>>>>>> 8f9ecd9fad8390a662d3cd072783b2256cdaf1f9
 

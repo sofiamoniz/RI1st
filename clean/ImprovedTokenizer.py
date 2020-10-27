@@ -1,3 +1,6 @@
+# Alina Yanchuk, nmec 89093
+# Ana Sofia Fernandes, nmec 88739
+
 import nltk
 nltk.download('punkt')
 from nltk.stem import PorterStemmer
@@ -25,6 +28,7 @@ class ImprovedTokenizer:
             
         return stop_words_list
 
+<<<<<<< HEAD
 
 
     def all_characs_same(self,s) :
@@ -32,6 +36,9 @@ class ImprovedTokenizer:
         """
         Verifies if a string has all the same chars
         """
+=======
+    def all_characs_same(self,s) : # Verifies if a string has all the same chars
+>>>>>>> 8f9ecd9fad8390a662d3cd072783b2256cdaf1f9
 
         n = len(s)
 
@@ -41,6 +48,13 @@ class ImprovedTokenizer:
 
         return True
 
+    def contains_digit(self, w): #Check if a given string contains digits
+
+        if any(char.isdigit() for char in w): return True
+
+    def is_website(self, w): #Check if a given string is a website
+
+        if ('www' in w or 'http' in w or 'https' in w) and w.count('.') > 1: return True
 
     def improved_tokenizer(self):
 
@@ -53,19 +67,18 @@ class ImprovedTokenizer:
         filtered_sentence = [] 
         ps =PorterStemmer()
 
-        
-        #check_general_conditions = [w for w in word_tokens if w not in stop_words if len(w) >= 3] #Save the words that are not stop_words and have len >=3
-        websites = [w for w in word_tokens if w not in stop_words if len(w) >= 3 if ('www' in w or 'http' in w or 'https' in w) if w.count('.') > 1 ] #Save websites from words that follow the previous rules
-        
-        for w in websites:
-            parse_object = urlparse(w)# These conditions are made to transfrom a website and give the user only the. 
-                                    # Relevant part. Eg: www.google.com -> google
-            if (parse_object.netloc != ''): filtered_sentence.append(parse_object.netloc.split('.')[1])
-            else:
-                # This refers to the websites objects that can't be treated by the library urlparse
-                if w.startswith('www'): filtered_sentence.append(w.split('.')[1])        
-       
-        filtered_sentence += [re.sub('[^0-9a-zA-Z]+', '', w) for w in word_tokens if w not in stop_words if len(w) >= 3 if w not in websites  if not (any(char.isdigit() for char in w)) ]
+        for w in word_tokens:
+            if w not in stop_words and len(w)>=3:
+                if self.is_website(w):
+                    parse_object = urlparse(w)
+                    if (parse_object.netloc != ''): filtered_sentence.append(parse_object.netloc.split('.')[1]) # This condition is made to transfrom a website and give the user only the. 
+                                                                                                                # Relevant part. Eg: www.google.com -> google
+                    else:
+                        if w.startswith('www'): filtered_sentence.append(w.split('.')[1])   # This refers to the objects that can't be treated by the library urlparse     
+                else:
+                    w = re.sub('[^0-9a-zA-Z]+', '', w)
+                    if not self.contains_digit(w): filtered_sentence.append(w)  #If the treated string doesn't contain numbers, it will be appended.
+                                                                                #This is made in order to avoid strange words like a23df or xcxft3, for example
 
         #Do the stem to the each word from filtered_sentence, using the PorterStemmer
         # Words with at least 3 chars (after the stem), and not having all the same chars (eg. zzz)

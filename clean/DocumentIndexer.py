@@ -1,3 +1,6 @@
+# Alina Yanchuk, nmec 89093
+# Ana Sofia Fernandes, nmec 88739
+
 from CorpusReader import CorpusReader
 from Indexer import Indexer
 from Results import Results
