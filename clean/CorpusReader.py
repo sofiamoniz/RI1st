@@ -1,3 +1,6 @@
+# Alina Yanchuk, nmec 89093
+# Ana Sofia Fernandes, nmec 88739
+
 import csv
 from SimpleTokenizer import *
 from ImprovedTokenizer import *

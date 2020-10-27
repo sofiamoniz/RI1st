@@ -1,3 +1,6 @@
+# Alina Yanchuk, nmec 89093
+# Ana Sofia Fernandes, nmec 88739
+
 import nltk
 nltk.download('punkt')
 from nltk.stem import PorterStemmer
@@ -18,7 +21,7 @@ class ImprovedTokenizer:
             
         return stop_words_list
 
-    def all_characs_same(self,s) : # Verifies if a string as all the same chars
+    def all_characs_same(self,s) : # Verifies if a string has all the same chars
 
         n = len(s)
 
@@ -28,11 +31,11 @@ class ImprovedTokenizer:
 
         return True
 
-    def contains_digit(self, w): #Check if a string contains digits
+    def contains_digit(self, w): #Check if a given string contains digits
 
         if any(char.isdigit() for char in w): return True
 
-    def is_website(self, w): #Check if a string is a website
+    def is_website(self, w): #Check if a given string is a website
 
         if ('www' in w or 'http' in w or 'https' in w) and w.count('.') > 1: return True
 
@@ -47,7 +50,8 @@ class ImprovedTokenizer:
             if w not in stop_words and len(w)>=3:
                 if self.is_website(w):
                     parse_object = urlparse(w)
-                    if (parse_object.netloc != ''): filtered_sentence.append(parse_object.netloc.split('.')[1])
+                    if (parse_object.netloc != ''): filtered_sentence.append(parse_object.netloc.split('.')[1]) # This condition is made to transfrom a website and give the user only the. 
+                                                                                                                # Relevant part. Eg: www.google.com -> google
                     else:
                         if w.startswith('www'): filtered_sentence.append(w.split('.')[1])   # This refers to the objects that can't be treated by the library urlparse     
                 else:

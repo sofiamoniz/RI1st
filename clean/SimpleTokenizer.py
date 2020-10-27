@@ -1,3 +1,6 @@
+# Alina Yanchuk, nmec 89093
+# Ana Sofia Fernandes, nmec 88739
+
 import re
 
 class SimpleTokenizer:
