@@ -68,6 +68,8 @@ class DocumentIndexer:
                     + "\n--- Directory with the Inverted Index: results/improvedTokenizer"
                     + "\n--- Directory that contains the real document Id's and auto generated ones: results\n")
         
+        print("\nTop 10 terms with frequency 1: "+str(results.terms_doc_frequency_1()))
+        print("\nTop 10 terms with highest frequency: "+str(results.terms_highest_doc_frequency()))
 
     def format_bytes(self,size): # Conversion 
         # 2**10 = 1024

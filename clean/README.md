@@ -8,6 +8,8 @@
         2.python3 Main.py -i <fileToRead> 
             (where -i means that ImprovedTokenizer will be used)
 
+### All the results ( Inverted Index and Id's mapping files are stored in the "results" folder )            
+
 ### Answers to the last exercise:
 
     1.What was the total indexing time and how much memory (roughly) is required to index
