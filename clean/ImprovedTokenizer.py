@@ -5,13 +5,20 @@ from nltk.tokenize import sent_tokenize, word_tokenize
 import re
 from urllib.parse import urlparse
 
+## Class that acts as the Improved Tokenizer
+
 class ImprovedTokenizer:
 
     def __init__(self, received_string):
         self.received_string=received_string
 
 
-    def list_stop_words(self): # Reads and saves the stop words from the file required
+
+    def list_stop_words(self): 
+
+        """
+        Reads and saves the stop words from the file required
+        """
 
         with open ("snowball_stopwords_EN.txt", mode='r') as stop_words:
             stop_words_list = [word.strip() for word in stop_words]
@@ -20,7 +27,11 @@ class ImprovedTokenizer:
 
 
 
-    def all_characs_same(self,s) : # Verifies if a string as all the same chars
+    def all_characs_same(self,s) :
+
+        """
+        Verifies if a string has all the same chars
+        """
 
         n = len(s)
 
@@ -32,6 +43,10 @@ class ImprovedTokenizer:
 
 
     def improved_tokenizer(self):
+
+        """
+        Returns an array 
+        """
 
         stop_words=self.list_stop_words() # Save the stop words to be used in a list
         word_tokens=word_tokenize(self.received_string) # Transform the received string in tokens, by using the function word_tokenize from library ntlk

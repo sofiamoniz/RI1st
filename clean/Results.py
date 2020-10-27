@@ -1,6 +1,8 @@
 import json
 import operator
 
+## Class that writes the results files and answers the questions in the assignment guide
+
 class Results:
 
     def __init__(self,inverted_index,docIds,tokenizer_type,input_file):
@@ -8,11 +10,28 @@ class Results:
         self.docsIds=docIds
         self.tokenizer_type=tokenizer_type
         self.file_name=input_file
-       
 
 
 
     def write_index_to_file(self):
+
+        """
+        Writes the Inverted Index to a file.
+
+        Example: file used- > example.csv     tokenizer used -> Improved
+
+        File generated:
+
+        
+        results
+                
+                simpleTokenizer
+                
+                improvedTokenizer
+                                
+                                 invertedIndex_example.txt                   <-----
+
+        """
 
         if(self.tokenizer_type=="s"):
             with open('results/simpleTokenizer/invertedIndex_'+self.file_name[:-4]+'.txt','w') as file_index:
@@ -23,19 +42,35 @@ class Results:
 
         ## To quickly load the file from disk to a dictionary in memory do:
         #     
-        # with open('results/invertedIndex.txt') as file_index:
+        # with open('results/improvedTokenizer/invertedIndex.txt') as file_index:
         #   dic = json.load(file_index)            
 
 
 
     def write_document_ids_to_file(self):
 
-        with open('results/documentIds.txt','w') as file_ids:
+        """
+        Writes the mapping between real doc IDs and the generated ones to a file.
+
+        File generated:
+
+        
+        results
+                
+                simpleTokenizer
+                
+                improvedTokenizer
+                                
+                documentIDs.txt           <-----
+
+        """
+
+        with open('results/documentIDs.txt','w') as file_ids:
             json.dump(self.docsIds, file_ids)
 
         ## To quickly load the file from disk to a dictionary in memory do:
         #     
-        # with open('results/documentIds.txt') as file_ids:
+        # with open('results/documentIDs.txt') as file_ids:
         #   dic = json.load(file_ids)
 
 
@@ -45,9 +80,13 @@ class Results:
 
 ## OPTIONAL:
 
-    #  Prints in terminal a table with the inverted index
+    
 
     def print_table_for_inverted_index(self):
+
+        """
+        Prints in terminal a table with the Inverted Index
+        """
 
         inverted_list=[]
         entry_list=[]
@@ -65,11 +104,14 @@ class Results:
 
 
 
-    ## TO ANSWER THE QUESTIONS:
-
-    # The ten first terms (in alphabetic order) that appear in only one document           
+    ## TO ANSWER THE QUESTIONS FROM ASSIGNMENT GUIDE:
+           
 
     def terms_doc_frequency_1(self):
+
+        """
+        Return and array with the ten first terms (in alphabetic order) that appear in only one document
+        """
 
         top_10=[]
         for term in self.inverted_index:
@@ -83,9 +125,13 @@ class Results:
 
 
 
-    # The ten terms with highest document frequency
+    
 
     def terms_highest_doc_frequency(self):
+
+        """
+        Return an dictionary with the ten terms with highest document frequency and their frequency
+        """
 
         top_10={}
         top=dict(sorted(self.inverted_index.items(), key=lambda i: i[1][0], reverse=True)[:10])  # Sorts by the doc frequency

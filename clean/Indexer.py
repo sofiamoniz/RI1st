@@ -1,10 +1,17 @@
 from sys import getsizeof
+
+## Class that creates the Inverted Index for the document Corpus
+
 class Indexer:
 
     def __init__(self):
         self.inverted_index=dict()
        
     def index_document(self,document_terms,document_id):
+
+        """
+
+        """
 
         for term in document_terms:
             if term not in self.inverted_index:
@@ -29,23 +36,38 @@ class Indexer:
 
     def get_inverted_index(self):
 
+        """
+        Returns the dictionary with the Inverted Index
+        """
+
         return self.inverted_index              
                 
                    
 
     def sort_inverted_index(self):    # Used after indexing all documents
 
+        """
+        Returns the dictionary with Inverted Index sorted in alphabetical order of the terms (keys)
+        """
         self.inverted_index={k: v for k, v in sorted(self.inverted_index.items(), key=lambda item: item[0])}
 
 
 
     def show_inverted_index(self):
 
+        """
+        Prints the Inverted Index
+        """
+
         print(self.inverted_index) 
    
 
 
     def get_size_in_mem(self):
+
+        """
+        Returns the size of the dictionary with the Inverted Index
+        """
 
         return getsizeof(self.inverted_index)
 

@@ -1,9 +1,27 @@
 import sys, getopt
 from DocumentIndexer import DocumentIndexer
 
+
+"""
+IR, October 2020
+Assignment 1: Indexing documents
+Autors: Alina Yanchuk, 89093
+        Sofia Moniz,
+"""
+
+## Main class that runs the project ( gets the arguments from command line and starts the program )
+
 def main(argv):
 
-    # Get the parameters and start the process:
+    """
+    The program needs 2 arguments: type of tokenizer and file to read.
+    Examples of usage:
+        Main.py -s ".csv"
+        Main.py -i ".csv"
+
+    After running, the results files are stored on the "results" folder.
+    """
+
     input_file = ''
 
     try:
@@ -26,6 +44,8 @@ def main(argv):
             input_file = arg
             doc_indexer=DocumentIndexer(input_file,'i')
             doc_indexer.document_indexer()
+
+
 
 if __name__ == '__main__':
     main(sys.argv[1:])
