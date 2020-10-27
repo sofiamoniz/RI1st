@@ -46,6 +46,5 @@ class Indexer:
 
 
     def get_size_in_mem(self):
-
-        return getsizeof(self.inverted_index)
+        return getsizeof(self.get_inverted_index())
 

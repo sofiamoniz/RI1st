@@ -43,10 +43,10 @@ class ImprovedTokenizer:
         Stem_words = []
         ps =PorterStemmer()
 
-         for w in word_tokens: 
+        for w in word_tokens: 
             if w not in stop_words and len(w) >=3:
                 if ('www' in w or 'http' in w or 'https' in w) and w.count('.') > 1: # This condition is made to transfrom a website and give the user only the. 
-                                                                                     # Relevant part. Eg: www.google.com -> google
+                                                                                        # Relevant part. Eg: www.google.com -> google
                     parse_object = urlparse(w)
                     if (parse_object.netloc != ''):
                         filtered_sentence.append(parse_object.netloc.split('.')[1])
@@ -57,11 +57,11 @@ class ImprovedTokenizer:
                     word = re.sub('[^0-9a-zA-Z]+', '', w) # Replaces special characters by nothing -> example anti-virus to antivirus
                     if not any(char.isdigit() for char in word):
                         filtered_sentence.append(word)
-                    #if not word.isdigit(): # If the string is a number, it will only save the ones with > 4 digits (meaning years)
-                    #    filtered_sentence.append(word)
-                    #elif not any(char.isdigit() for char in word): # These conditions are made to avoid words like xy3 and x3y that are not perceptible
-                    #    if len(word) > 3 and re.match('^[a-zA-Z]+', word) and not word[-1].isalpha() :
-                    #        filtered_sentence.append(word)
+                #if not word.isdigit(): # If the string is a number, it will only save the ones with > 4 digits (meaning years)
+                #    filtered_sentence.append(word)
+                #elif not any(char.isdigit() for char in word): # These conditions are made to avoid words like xy3 and x3y that are not perceptible
+                #    if len(word) > 3 and re.match('^[a-zA-Z]+', word) and not word[-1].isalpha() :
+                #        filtered_sentence.append(word)
        
         for w in filtered_sentence:            
             rootWord=ps.stem(w) # Do the stem to the each word from filtered_sentence, using the PorterStemmer

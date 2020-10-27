@@ -14,12 +14,12 @@
     this collection?
         A:
             -With simple tokenizer:
-                -Indexing time: 287.253 seconds
-                -Memory used by python process: 443.379 megabytes
+                -Indexing time: 1.989 seconds
+                -Memory used by python process: 443.535 megabytes
                 -Memory used by the dictionary structure: 2.5 megabytes
             -With improved tokenizer:
-                -Indexing time: 98.239 seconds
-                -Memory used by python process: 355.699 megabytes
+                -Indexing time: 1.533 seconds
+                -Memory used by python process: 355.996 megabytes
                 -Memory used by the dictionary structure: 2.5 megabytes
 
     2.What is your vocabulary size?
