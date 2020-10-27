@@ -1,4 +1,5 @@
 import json
+import operator
 
 class Results:
 
@@ -43,7 +44,8 @@ class Results:
 
 
 ## OPTIONAL:
-#  Prints in terminal a table with the inverted index
+
+    #  Prints in terminal a table with the inverted index
 
     def print_table_for_inverted_index(self):
 
@@ -60,4 +62,34 @@ class Results:
         for item in inverted_list:
             print ("{:<20} {:<9} {:<10}".format(item[0],str(item[1]),str(item[2])))        
 
-            
+
+
+
+    ## TO ANSWER THE QUESTIONS:
+
+    # The ten first terms (in alphabetic order) that appear in only one document           
+
+    def terms_doc_frequency_1(self):
+
+        top_10=[]
+        for term in self.inverted_index:
+            if(len(top_10)!=10):
+                if(self.inverted_index[term][0]==1): # doc frequency for this term == 1
+                    top_10.append(term)
+            else: break
+
+        return top_10
+                
+
+
+
+    # The ten terms with highest document frequency
+
+    def terms_highest_doc_frequency(self):
+
+        top_10={}
+        top=dict(sorted(self.inverted_index.items(), key=lambda i: i[1][0], reverse=True)[:10])  # Sorts by the doc frequency
+        for key in top:
+            top_10[key]=top[key][0]  
+       
+        return top_10
