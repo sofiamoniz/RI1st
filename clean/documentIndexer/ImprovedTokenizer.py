@@ -45,7 +45,7 @@ class ImprovedTokenizer:
         After a research, we found that
         "In English the most common repeated letters are ss, ee, tt, ff, ll, mm and oo" from https://www3.nd.edu/~busiforc/handouts/cryptography/cryptography%20hints.html
         
-        So, we also exclude all ther terms with repeated chars not from this list.
+        So, we also exclude all the terms with repeated chars that are not present in this list.
         """
 
         n = len(s)
@@ -88,19 +88,19 @@ class ImprovedTokenizer:
     def improved_tokenizer(self):
 
         """
-        Returns an array with treated and tokenized terms (without numbers,repeated sequences of chars, treated URLs, len bigger than 3, after PorterStemmer, and so on...)
+        Returns an array with treated and tokenized terms (without numbers,repeated sequences of chars, treated URLs, len bigger than 3 (after PorterStemmer), and so on...)
         """
 
-        stop_words=self.list_stop_words() # Save the stop words to be used in a list
+        stop_words=self.list_stop_words() # Save the stop words, to be used, in a list
         word_tokens=word_tokenize(self.received_string) # Transform the received string in tokens, by using the function word_tokenize from library ntlk
         filtered_sentence = [] 
         ps =PorterStemmer()
 
         for w in word_tokens:
             if w not in stop_words and len(w)>=3:
-                if self.is_website(w):
+                if self.is_website(w): #If the string is a website, it will be treated in order to give only the important part
                     parse_object = urlparse(w)
-                    if (parse_object.netloc != ''): filtered_sentence.append(parse_object.netloc.split('.')[1]) # This condition is made to transfrom a website and give the user only the. 
+                    if (parse_object.netloc != ''): filtered_sentence.append(parse_object.netloc.split('.')[1]) # This condition is made to transfrom a website and give the user only the 
                                                                                                                 # Relevant part. Eg: www.google.com -> google
                     else:
                         if w.startswith('www'): filtered_sentence.append(w.split('.')[1])   # This refers to the objects that can't be treated by the library urlparse     
@@ -111,9 +111,11 @@ class ImprovedTokenizer:
 
         #Do the stem to the each word from filtered_sentence, using the PorterStemmer
         # Words with at least 3 chars (after the stem), and not having all the same chars or more than 3 sequentially (eg. zzz)
+        
         final_tokenized=[]
         for w in filtered_sentence:
-            w=ps.stem(w)
+            w=ps.stem(w) #Stem the received word in worder to remove certain sufixes, using the PorterStemmer
             if (len(w)>=3) and (not self.characs_same(w)):
                 final_tokenized.append(w)
+        
         return final_tokenized

@@ -14,7 +14,7 @@ import sys, getopt
 import os
 import psutil
 
-## Class that acts as a pipeline for the all indexing process ( calls all the other classes and methods  
+## Class that acts as a pipeline for the all indexing process ( calls all the other classes and methods  )
 
 class DocumentIndexer:
 
@@ -72,14 +72,14 @@ class DocumentIndexer:
         results = Results(inverted_index,doc_ids,self.tokenizer_type,self.input_file) ## Results ( writes informations to files )
         results.write_document_ids_to_file()
         results.write_index_to_file()
-        #results.print_table_for_inverted_index()
+        #results.print_table_for_inverted_index() # This line can be descommented if we wish to print the table in the terminal
         
 
 
         process = psutil.Process(os.getpid())
         
-        memory_used= self.format_bytes(process.memory_info().rss) # Memory used by the program
-        memory_dic = self.format_bytes(indexer.get_size_in_mem()) # Memory of the structure used
+        memory_used= self.format_bytes(process.memory_info().rss) # Memory used by the Python program
+        memory_dic = self.format_bytes(indexer.get_size_in_mem()) # Memory occupied by the structure used
 
         
 
@@ -113,7 +113,7 @@ class DocumentIndexer:
     def format_bytes(self,size): 
 
         """
-        Conversion between bytes
+        Makes the conversion of a received size to a human readable one
         """
         
         power = 2**10 # 2**10 = 1024

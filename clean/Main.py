@@ -18,10 +18,10 @@ def main(argv):
 
     Examples of usage:
 
-        Main.py -s "all_sources_metadata_2020-03-13.csv"
-        Main.py -i "all_sources_metadata_2020-03-13.csv"
+        python3 Main.py -s "all_sources_metadata_2020-03-13.csv"
+        python3 Main.py -i "all_sources_metadata_2020-03-13.csv"
 
-    After running, the results files are stored on the "results" folder.
+    After running, the results files are stored in the "results" folder.
     """
 
     input_file = ''

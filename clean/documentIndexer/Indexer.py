@@ -23,7 +23,7 @@ class Indexer:
                                         |         if the occurance_of_term_in_doc1 > 0 and so on...
                                         |
                                         |
-                                    As in python, the order of arrays is mantained, we always now that the first position is
+                                    As in python the order of arrays is mantained, we always know that the first position is
                                     the document frequency and the second is the dictionary with documents IDs and ocurrences
         """
 

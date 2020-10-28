@@ -29,7 +29,7 @@ class CorpusReader:
         tokenizer (that returns an array of terms).
 
         Returns an array of arrays, where each array stores the terms, from tokenization, for respective document.
-        Because in python the order of an array is always the same, we know that the first array has the terms of
+        Once in python the order of an array is always the same, we know that the first array has the terms of
         the first readed document, the second has the terms of the second readed document and so on...
         Also, returns an array with the real document IDs, that were stored in the same order as mentioned above, so we know that
         the first ID corresponds to the first reader document, and so on...
@@ -37,8 +37,8 @@ class CorpusReader:
 
         already_read = [] # Will store the title of documents already read
         corpus_tokenized=[] # Will store, at each position, an array, for each document, with the terms after tokenization
-        title_abstract = ""
-        real_doc_ids=[]
+        title_abstract = "" # String that will save title+abstract
+        real_doc_ids=[] # Will store the real ID of each document
 
         with open (self.file_name, mode='r') as csv_to_read:
             csv_reader=csv.DictReader(csv_to_read)
