@@ -1,16 +1,13 @@
-# Alina Yanchuk, nmec 89093
-# Ana Sofia Fernandes, nmec 88739
-
-import sys, getopt
-from DocumentIndexer import DocumentIndexer
-
-
 """
 IR, October 2020
 Assignment 1: Indexing documents
 Autors: Alina Yanchuk, 89093
-        Sofia Moniz,
+        Ana Sofia Fernandes, 88739
 """
+
+
+import sys, getopt
+from documentIndexer.DocumentIndexer import DocumentIndexer
 
 ## Main class that runs the project ( gets the arguments from command line and starts the program )
 
@@ -18,9 +15,11 @@ def main(argv):
 
     """
     The program needs 2 arguments: type of tokenizer and file to read.
+
     Examples of usage:
-        Main.py -s ".csv"
-        Main.py -i ".csv"
+
+        Main.py -s "all_sources_metadata_2020-03-13.csv"
+        Main.py -i "all_sources_metadata_2020-03-13.csv"
 
     After running, the results files are stored on the "results" folder.
     """
