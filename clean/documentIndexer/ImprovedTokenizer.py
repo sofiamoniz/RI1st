@@ -8,7 +8,7 @@ Autors: Alina Yanchuk, 89093
 import nltk
 nltk.download('punkt')
 from nltk.stem import PorterStemmer
-from nltk.tokenize import sent_tokenize, word_tokenize
+from nltk.tokenize import word_tokenize
 import re
 from urllib.parse import urlparse
 
@@ -16,21 +16,22 @@ from urllib.parse import urlparse
 
 class ImprovedTokenizer:
 
-    def __init__(self, received_string):
-        self.received_string=received_string
+    def __init__(self):
+        self.ps =PorterStemmer()
 
 
 
-    def list_stop_words(self): 
+
+    def set_stop_words(self): 
 
         """
         Reads and saves the stop words from the file required
         """
 
         with open ("documentIndexer/snowball_stopwords_EN.txt", mode='r') as stop_words:
-            stop_words_list = [word.strip() for word in stop_words]
+            stop_words_set = set([word.strip() for word in stop_words])
             
-        return stop_words_list
+        return stop_words_set
 
 
 
@@ -85,17 +86,16 @@ class ImprovedTokenizer:
 
 
 
-    def improved_tokenizer(self):
+    def improved_tokenizer(self,received_string):
 
         """
         Returns an array with treated and tokenized terms (without numbers,repeated sequences of chars, treated URLs, len bigger than 3 (after PorterStemmer), and so on...)
         """
 
-        stop_words=self.list_stop_words() # Save the stop words, to be used, in a list
-        word_tokens=word_tokenize(self.received_string) # Transform the received string in tokens, by using the function word_tokenize from library ntlk
+        stop_words=self.set_stop_words() # Save the stop words, to be used, in a list
+        word_tokens=word_tokenize(received_string) # Transform the received string in tokens, by using the function word_tokenize from library ntlk
         filtered_sentence = [] 
-        ps =PorterStemmer()
-
+        
         for w in word_tokens:
             if w not in stop_words and len(w)>=3:
                 if self.is_website(w): #If the string is a website, it will be treated in order to give only the important part
@@ -114,8 +114,9 @@ class ImprovedTokenizer:
         
         final_tokenized=[]
         for w in filtered_sentence:
-            w=ps.stem(w) #Stem the received word in order to remove certain sufixes, using the PorterStemmer
-            if (len(w)>=3) and (not self.characs_same(w)):
-                final_tokenized.append(w)
+            if (not self.characs_same(w)):
+                w=self.ps.stem(w) #Stem the received word in order to remove certain sufixes, using the PorterStemmer
+                if (len(w)>=3):
+                    final_tokenized.append(w)
         
         return final_tokenized

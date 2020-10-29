@@ -18,6 +18,8 @@ class CorpusReader:
     def __init__(self, file_name, chosen_arg):
         self.file_name = file_name
         self.chosen_arg=chosen_arg
+        self.simp = SimpleTokenizer()
+        self.improv = ImprovedTokenizer()
 
 
 
@@ -54,11 +56,9 @@ class CorpusReader:
                         title_abstract = row['title'] + " " + row['abstract'] # Save the title and the abstract of the document and save it to the doc_content list
                         doc_content.append(title_abstract)
                         if self.chosen_arg == 's': # The user chose to use the simpleTokenizer
-                            simp = SimpleTokenizer(title_abstract)
-                            doc_content=simp.simple_tokenizer()
+                            doc_content=self.simp.simple_tokenizer(title_abstract)
                         elif self.chosen_arg == 'i': # The user chose to use the improvedTokenizer
-                            improv = ImprovedTokenizer(title_abstract)
-                            doc_content=improv.improved_tokenizer()
+                            doc_content=self.improv.improved_tokenizer(title_abstract)
                         corpus_tokenized.append(doc_content) # Save the content of the document after passing through the tokenizer
 
 

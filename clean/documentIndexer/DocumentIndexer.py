@@ -10,7 +10,6 @@ from documentIndexer.CorpusReader import CorpusReader
 from documentIndexer.Indexer import Indexer
 from documentIndexer.Results import Results
 import time
-import sys, getopt
 import os
 import psutil
 

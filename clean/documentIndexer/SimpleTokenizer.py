@@ -11,19 +11,18 @@ import re
 
 class SimpleTokenizer:
 
-    def __init__(self, received_string):
-        self.received_string=received_string
+    def __init__(self):
+        pass
 
 
-
-    def simple_tokenizer(self):
+    def simple_tokenizer(self, received_string):
 
         """
         Returns an array with lower cased terms only with alphabetic characters and len 3 or more
         """
 
-        self.received_string=self.replace_non_alpha(self.received_string) # Replace non-alpha chars
-        self.received_string=self.received_string.lower().split() # Put all chars to lower          
+        received_string=self.replace_non_alpha(self.received_string) # Replace non-alpha chars
+        received_string=received_string.lower().split() # Put all chars to lower          
                   
         return [word for word in self.received_string if len(word) >=3 ] # Only admit strings with len >=3
 

@@ -20,14 +20,14 @@
                 -Memory used by python process: 443.445 megabytes
                 -Memory used by the dictionary structure: 2.5 megabytes
             -With improved tokenizer:
-                -Indexing time: 112.872 seconds
-                -Memory used by python process: 344.172 megabytes
+                -Indexing time: 95.214 seconds
+                -Memory used by python process: 343.855 megabytes
                 -Memory used by the dictionary structure: 2.5 megabytes
 
     2.What is your vocabulary size?
         A: 
             -With simple tokenizer: 4159309
-            -With improved tokenizer: 2984774
+            -With improved tokenizer: 2978312
 
     3.List the ten first terms (in alphabetic order) that appear in only one document (document
     frequency = 1).
