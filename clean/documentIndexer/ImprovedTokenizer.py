@@ -109,12 +109,12 @@ class ImprovedTokenizer:
                     if not self.contains_digit(w): filtered_sentence.append(w)  #If the treated string doesn't contain numbers, it will be appended.
                                                                                 #This is made in order to avoid strange words like a23df or xcxft3, for example
 
-        #Do the stem to the each word from filtered_sentence, using the PorterStemmer
-        # Words with at least 3 chars (after the stem), and not having all the same chars or more than 3 sequentially (eg. zzz)
+        #Do the stem to each word from filtered_sentence, using the PorterStemmer
+        # Words with at least 3 chars (after the stem), and not having all the same chars or more than 3 sequentially (eg. zzz) will not be appended
         
         final_tokenized=[]
         for w in filtered_sentence:
-            w=ps.stem(w) #Stem the received word in worder to remove certain sufixes, using the PorterStemmer
+            w=ps.stem(w) #Stem the received word in order to remove certain sufixes, using the PorterStemmer
             if (len(w)>=3) and (not self.characs_same(w)):
                 final_tokenized.append(w)
         
